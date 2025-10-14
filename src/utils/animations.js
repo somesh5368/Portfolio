@@ -15,7 +15,7 @@ export default function Hero() {
     >
       <div className="text-center">
         <h1 className="text-5xl font-bold mb-4">
-          Hi, I'm Your Name
+          Hi, I&apos;m Your Name
         </h1>
         <p className="text-xl text-gray-600">
           Full Stack Developer
