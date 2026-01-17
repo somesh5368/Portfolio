@@ -10,7 +10,7 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
   compress: true,
-  swcMinify: true,
+  // swcMinify: true,  // ❌ remove this line
 };
 
 export default nextConfig;
