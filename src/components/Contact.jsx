@@ -16,8 +16,18 @@ export default function Contact() {
     setIsSubmitting(true);
     setSubmitMessage("");
 
+    // Get API key from environment variable (SECURE - NOT HARDCODED)
+    const apiKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+
+    if (!apiKey) {
+      setSubmitMessage("❌ Contact form is not configured properly. Please contact the admin.");
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitMessage(""), 5000);
+      return;
+    }
+
     const data = {
-      access_key: "70b31048-8e86-422a-8b24-354764757045",
+      access_key: apiKey,
       name: formData.name,
       email: formData.email,
       message: formData.message,
@@ -44,6 +54,7 @@ export default function Contact() {
         setSubmitMessage(`❌ ${result.message || 'Failed to send message'}`);
       }
     } catch (error) {
+      console.error("Contact form error:", error);
       setSubmitMessage("❌ Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -147,7 +158,7 @@ export default function Contact() {
             {isSubmitting ? (
               <span className="flex items-center justify-center gap-2">
                 <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                 < ircle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                 </svg>
                 Sending...
@@ -200,7 +211,7 @@ export default function Contact() {
               </svg>
             </div>
             <h3 className="text-white font-semibold mb-2">Location</h3>
-            <p className="text-gray-400 text-sm">Lucknow,India</p>
+            <p className="text-gray-400 text-sm">Lucknow, India</p>
           </div>
 
           <div className="bg-slate-800/30 p-6 rounded-xl text-center border border-slate-700/50">
